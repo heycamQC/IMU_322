@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Preload tema claro para evitar FOUC -->
+  <script>
+    (function(){
+      try{
+        var k='pref-theme', saved=localStorage.getItem(k);
+        var light = saved ? (saved==='light') : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
+        if (light) document.documentElement.classList.add('preload-theme-light');
+      }catch(e){}
+    })();
+  </script>
+  <style>
+    /* Evita parpadeo al aplicar tema claro antes del JS */
+    .preload-theme-light body{ background:#f6f7fb; color:#0f1220; }
+  </style>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reseñas | Movisionary</title>
+  <meta name="description" content="Reseñas de la comunidad: comparte tu opinión y descubre qué ver.">
+
+  <!-- Fuentes (mismas que el index) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;600&family=Urbanist:wght@700;800&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- CSS/JS (estando en /pages, subimos un nivel) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <script type="module" src="../js/main.js" defer></script>
+</head>
+
+<body class="theme-dark page-resenas">
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container ">
+      <a href="../index.html" class="logo" aria-label="Inicio">
+        <span class="logo-mark">🎬</span><span class="logo-type">Movisionary</span>
+      </a>
+
+      <!-- Botón hamburguesa -->
+      <button id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+      <nav class="nav menu" aria-label="Navegación principal">
+      <a href="../index.html">Inicio</a>
+      <a href="./news.html">Noticias</a>
+      <a href="./resenas.html" class="active" aria-current="page">Reseñas</a>
+      <a href="./library.html">Biblioteca</a>
+      <a href="./top.html">Top 10</a>
+      <a class="cta" href="./recommender.html">Recomendador</a>
+      <button id="toggle-theme" class="btn-theme" type="button" aria-label="Cambiar tema">🌙</button>
+    </nav>
+
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero hero-reviews">
+    <div class="container">
+      <p class="eyebrow">Cine & Series · Opinión</p>
+      <h1 class="gradient-title">Reseñas de la comunidad</h1>
+      <p class="sub">Comparte tu opinión y descubre qué dice la comunidad. Rápido, claro y bonito.</p>
+
+      <div class="hero-actions">
+        <a href="#form" class="btn btn-primary">Escribir reseña</a>
+        <a href="#ultimas" class="btn btn-ghost">Ver reseñas</a>
+      </div>
+
+      <ul class="stats">
+        <li><strong>+3K</strong><span>reseñas</span></li>
+        <li><strong>4.8★</strong><span>promedio</span></li>
+        <li><strong>24/7</strong><span>moderado</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Filtros -->
+  <section class="filters">
+    <div class="container">
+      <button class="chip is-active" data-filter="all">Todas</button>
+      <button class="chip" data-filter="drama">Drama</button>
+      <button class="chip" data-filter="scifi">Sci-Fi</button>
+      <button class="chip" data-filter="animacion">Animación</button>
+      <button class="chip" data-filter="thriller">Thriller</button>
+    </div>
+  </section>
+
+  <!-- Grid de reseñas -->
+  <main id="ultimas" class="container">
+    <section class="review-grid">
+      <article class="review-card" data-cat="scifi" data-score="4.6">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkp9h8pwSaw471-lwrEO8jsy6aqe6ftG_Dxw&s" alt="Flow">
+        <div class="review-content">
+          <h2>Flow</h2>
+          <p>Producción de Letonia, Bélgica y Francia.</p>
+          <div class="review-footer">
+            <span class="rating">★ 4.6</span><span class="author">por Ana M.</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="review-card" data-cat="drama" data-score="4.2">
+        <img src="https://bhpcollectibles.com/wp-content/uploads/2024/01/1960-1024x749.jpg" alt="Poor Things">
+        <div class="review-content">
+          <h2>Poor Things</h2>
+          <p>Fábula audaz, visualmente exquisita y con actuaciones descollantes.</p>
+          <div class="review-footer">
+            <span class="rating">★ 4.2</span><span class="author">por L. Rivera</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="review-card" data-cat="animacion" data-score="4.8">
+        <img src="https://images.squarespace-cdn.com/content/v1/51b3dc8ee4b051b96ceb10de/a528ec50-cc70-46f0-a2e3-31b279594daa/spider-man-across-the-spider-verse-banner-features-an-epic-number-of-spider-people.jpg" alt="Spider-Verse">
+        <div class="review-content">
+          <h2>Spider-Man: Across the Spider-Verse</h2>
+          <p>Animación innovadora, ritmo vibrante y mucho corazón.</p>
+          <div class="review-footer">
+            <span class="rating">★ 4.8</span><span class="author">por Nico P.</span>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <p>© 2025 Movisionary · Reseñas</p>
+    </div>
+  </footer>
+
+
+</body>
+</html>

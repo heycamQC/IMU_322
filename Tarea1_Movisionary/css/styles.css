@@ -1,0 +1,551 @@
+/* ========================================================================
+   MOVISIONARY — STYLE.CSS 
+   ========================================================================
+*/
+:root{
+  /* Paleta base */
+  --bg:#090a0e;
+  --bg-soft:#12131a;
+  --text:#eff0f3;
+  --muted:#bfc3cc;
+
+  /* Superficies */
+  --card:#171925;
+  --border:#26293a;     /* usado por base */
+  --panel:#121826;      /* usado por news/reviews */
+  --stroke:#2a3448;     /* borde cards/news */
+
+  /* Marcas / acentos */
+  --brand1:#7aa7ff;
+  --brand2:#f3d27b;
+  --accent:#5be3b4;
+  --primary:#e50914;    /* rojo Netflix */
+  --accent-alt:#7dd3fc;
+
+  /* Gradiente decorativo */
+  --g1:#74c4ff; --g2:#a68cff; --g3:#f6e06b;
+
+  /* Layout */
+  --radius:18px;
+  --shadow:0 18px 40px rgba(0,0,0,.35);
+  --maxw:1180px;
+}
+
+/* Preload para evitar “flash” al forzar tema claro antes de que cargue el JS */
+.preload-theme-light body{ background:#f6f7fb; color:#0f1220; }
+
+/* Tema claro (se aplica con body.theme-light) */
+body.theme-light {
+  --bg:#f4f5f8;
+  --bg-soft:#ffffff;
+  --card:#ffffff;
+  --text:#1a1a1a;
+  --muted:#555;
+  --border:#d4d7de;
+  --g1:#6a8cff; --g2:#b59cff; --g3:#ffd66e;
+  --accent:#00c691;
+  background: var(--bg);
+  color: var(--text);
+}
+
+
+/* =========================================================================
+   01) RESET & BASE — tipografías, contenedores, helpers, tipografía fluida
+   ========================================================================= */
+*{ box-sizing:border-box }
+html,body{
+   margin:0; 
+   padding:0 }
+img{ 
+  max-width:100%; 
+  height:auto; 
+  display:block }
+a{ text-decoration:none }
+:focus-visible{ 
+  outline:2px dashed rgba(255,255,255,.35); 
+  outline-offset:2px }
+
+body{
+  background:linear-gradient(180deg,#090a0e 0%,#0a0b11 60%,#0b0c13 100%);
+  color:var(--text);
+  font-family:"Lexend Deca","Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;
+  line-height:1.5;
+}
+h1,h2,h3,.logo-type{
+  font-family:"Urbanist","Montserrat Alternates","Poppins",system-ui,sans-serif;
+  letter-spacing:.3px;
+}
+
+/* Contenedor fluido (usa var(--maxw) y 92% de viewport) */
+.container{
+  max-width: min(var(--maxw), 92%);
+  margin-inline:auto;
+  padding:0 20px;
+}
+
+/* Tipografía fluida (sin media queries) */
+h1 { font-size: clamp(1.8rem, 2vw + 1rem, 3rem); }
+h2 { font-size: clamp(1.4rem, 1.2vw + 1rem, 2rem); }
+p,li{ font-size: clamp(.95rem, .3vw + .8rem, 1.05rem); line-height: 1.6; }
+
+
+/* =========================================================================
+   02) NAVEGACIÓN GLOBAL — header, nav y menú móvil
+   - Funciona con .nav o .menu (selector universal)
+   - Requiere botón #nav-toggle y clase body.nav-open desde JS
+   ========================================================================= */
+.header,.main-header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(9,10,14,.6); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--stroke);
+}
+.main-header .container,
+.nav{ display:flex; align-items:center; gap:16px; padding:14px 0;flex-wrap: nowrap; }
+/* —— Header: alinear logo y hamburguesa en una sola línea —— */
+.header .container,
+.main-header .container{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 0;
+  flex-wrap: nowrap;
+}
+
+/* el nav horizontal va a la derecha en desktop */
+header nav.menu,
+header nav.nav{ margin-left:auto; }
+
+.logo{ display:flex; align-items:center; gap:10px; color:var(--text); font-weight:800 }
+.logo-mark{ filter:drop-shadow(0 6px 16px rgba(116,196,255,.35)) }
+.logo-type{ font-size:20px }
+
+.menu,.nav{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-left:auto }
+.menu a,.nav a{ color:var(--text); opacity:.95; padding:10px 14px; border-radius:12px; border:1px solid transparent }
+.menu a:hover{ background:var(--card) }
+.nav a.active{ border-color:var(--stroke); background:rgba(255,255,255,.04) }
+.nav a.cta{ background:linear-gradient(90deg,var(--brand1),var(--brand2)); color:#0b0f17; font-weight:700 }
+
+/* Desktop base */
+header,.site-header { position: sticky; top:0; z-index:50 }
+#nav-toggle{ display:none }
+
+/* Tablet: compacta paddings */
+@media (max-width:1024px){
+  .menu{ gap:.5rem }
+  .menu a{ padding:.55rem .75rem }
+}
+
+/* Móvil: colapsa en panel flotante */
+@media (max-width:768px){
+  /* Compatible con .menu o .nav */
+  :is(.menu,.nav){
+    position:absolute; right:1rem; left:1rem; top:64px;
+    background:var(--panel);
+    border:1px solid var(--stroke);
+    border-radius:12px; padding:.5rem;
+    display:none; flex-direction:column;
+  }
+  body.nav-open :is(.menu,.nav){ display:flex }
+  :is(.menu,.nav) a{ width:100% }
+
+  #nav-toggle{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:42px; height:42px; border:1px solid var(--stroke);
+    border-radius:10px; background:transparent; cursor:pointer;
+    margin-left:auto;  
+  }
+}
+@media (max-width:480px){ :is(.menu,.nav){ top:56px }}
+
+
+/* =========================================================================
+   03) HERO — encabezado de página/sección con gradientes
+   ========================================================================= */
+.hero{ position:relative; overflow:hidden; padding:clamp(32px,5vw,56px) 0 16px }
+.hero-gradient{
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(800px 500px at 10% 10%, #79c8ff22, transparent 60%),
+    radial-gradient(800px 500px at 90% 30%, #a78bfa22, transparent 60%),
+    radial-gradient(800px 500px at 50% 90%, #f6e06b22, transparent 60%);
+}
+.eyebrow{ display:inline-block; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#d3d7e7; margin-bottom:6px }
+.gradient-title,.grad-title{
+  font-size:clamp(1.8rem,4vw,3rem); line-height:1.05; margin:.2em 0 .3em;
+  background:linear-gradient(90deg,var(--g1),var(--g2),var(--g3));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  text-shadow:0 6px 28px #00000060;
+}
+.lead,.hero .sub{ color:var(--muted); max-width:56ch }
+.cta-row,.hero-actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top:14px }
+
+
+.hero h1{ margin:0 }
+.hero p{ margin:.5rem 0 1rem; max-width:60ch }
+@media (max-width:1024px){
+  .hero{ grid-template-columns:1fr; text-align:center }
+  .hero p{ margin-inline:auto }
+}
+
+/* Botones */
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:10px 16px; border-radius:999px; font-weight:600; border:1px solid var(--stroke); cursor:pointer }
+.btn-primary,.btn.primary{ background:linear-gradient(90deg,var(--brand1),var(--brand2)); color:#0b0f17; border:none; box-shadow:var(--shadow) }
+.btn-ghost,.btn-ghost{ color:var(--text); background:transparent }
+.btn-light{ color:#0c0d12; background:#e9eef7 }
+
+.stats,.kpis{ display:flex; gap:16px; margin-top:22px; padding:0; list-style:none }
+.stats li,.kpi{ background:rgba(255,255,255,.03); border:1px solid var(--stroke); border-radius:16px; padding:12px 16px; text-align:center }
+.kpi strong{ font-size:20px; display:block }
+.kpi span,.stats span{ color:var(--muted); font-size:.85rem }
+
+
+/* =========================================================================
+   04) SECCIONES GENÉRICAS — grids, cards, paneles
+   ========================================================================= */
+.section{ padding:36px 0; border-block:1px solid #0c0d12 }
+.section-head{ display:flex; align-items:end; justify-content:space-between; gap:16px; margin-bottom:12px }
+.link{ color:#cfd3df } .link:hover{ color:#fff }
+.grad-subtitle{
+  font-size:26px;
+  background:linear-gradient(90deg,var(--g1),var(--g2),var(--g3));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+
+/* Grid base (4 col desktop; usa utilidades si necesitas 12 col) */
+.grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px }
+@media (max-width:980px){ .grid{ grid-template-columns:repeat(2,1fr) } }
+@media (max-width:560px){ .grid{ grid-template-columns:1fr } }
+
+.card{
+  background:linear-gradient(180deg,#131521,#0f1120);
+  border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+}
+.card .thumb{
+  /* Póster 2:3 sin deformación */
+  aspect-ratio:2/3; height:auto; overflow:hidden;
+  background:linear-gradient(135deg,#20253a,#1a1f2f);
+  border-top-left-radius:var(--radius); border-top-right-radius:var(--radius);
+}
+.card .thumb img{ width:100%; height:100%; object-fit:cover; display:block }
+.card .content{ padding:12px }
+.card h3{ margin:6px 0 4px; font-size:18px }
+.meta{ color:#a8afc2; font-size:13px }
+.rate{ color:#ffd166 }
+
+/* Layout de dos columnas (informes/paneles) */
+.split{ display:grid; grid-template-columns:1fr 1fr; gap:16px }
+.panel{
+  background:linear-gradient(180deg,#12131a,#0e0f16);
+  border:1px solid var(--border); border-radius:16px; padding:16px;
+}
+.panel-title{ margin:0 0 8px 0 }
+.list{ margin:0 0 12px 0; padding:0; list-style:none }
+.item{ display:flex; align-items:center; justify-content:space-between; gap:8px; color:#d7dbe8; padding:10px 12px; border-radius:12px }
+.item:hover{ background:#161827 }
+.item em{ font-style:normal; color:#9aa3b7; font-size:12px }
+
+
+/* =========================================================================
+   05) TEMA CLARO/OSCURO — botón + accesibilidad
+   ========================================================================= */
+body.theme-dark{
+  background: radial-gradient(1000px 500px at 20% 0%, rgba(247,222,140,.06), transparent), var(--bg);
+  color:var(--text);
+}
+.btn-theme{
+  border:1px solid var(--stroke); background:rgba(255,255,255,.05); color:var(--text);
+  border-radius:50%; width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center;
+  font-size:1.1rem; line-height:1; cursor:pointer; transition:background .25s, transform .15s, border-color .25s;
+}
+.btn-theme:hover{ background:rgba(255,255,255,.12); transform:rotate(-10deg) }
+.btn-theme:active{ transform:scale(.96) }
+.btn-theme:focus-visible{ outline:2px solid var(--brand1); outline-offset:2px }
+body.theme-light .btn-theme{ background:rgba(0,0,0,.06); border-color:var(--border); color:#0b0f17 }
+body.theme-light .btn-theme:hover{ background:rgba(0,0,0,.12); border-color:#cbd2e1 }
+@media (prefers-reduced-motion:reduce){
+  .btn-theme,.btn-theme:hover,.btn-theme:active{ transition:none; transform:none }
+}
+
+
+
+
+/* =========================================================================
+   07) RESEÑAS — grid auto-fit + rating
+   ========================================================================= */
+.hero.hero-reviews{
+  padding:clamp(32px,5vw,56px) 0 16px;
+  background:radial-gradient(600px 300px at 15% 0%, rgba(183,133,255,.12), transparent);
+}
+.review-grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px; padding:24px 0 64px;
+}
+.review-card{
+  background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
+  border:1px solid var(--stroke); border-radius:18px; overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.review-card:hover{ transform:translateY(-4px); border-color:#33415e; box-shadow:0 16px 40px rgba(0,0,0,.35) }
+.review-card img{ width:100%; height:200px; object-fit:cover; display:block; background:#0f1420 }
+.review-card .review-content{ padding:16px; display:grid; gap:10px }
+.review-card h2{
+  font-size:1.06rem; line-height:1.25; margin:0;
+  background:linear-gradient(90deg,#b0c8ff,#f6d98a 60%); -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.review-card p{ color:var(--muted); font-size:.95rem; margin:0 }
+.review-card .review-footer{ display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:.85rem }
+.review-card .rating{
+  display:inline-block; min-width:52px; text-align:center;
+  background:linear-gradient(90deg,var(--brand1),var(--brand2)); color:#0b0f17; font-weight:800;
+  padding:6px 10px; border-radius:10px;
+}
+
+
+/* =========================================================================
+  FOOTER — enlaces + copy
+   ========================================================================= */
+.footer,.main-footer{ border-top:1px solid var(--stroke); padding:24px 0; color:var(--muted); text-align:center }
+.foot-grid{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding-bottom:14px }
+.grad-text{ background:linear-gradient(90deg,var(--g1),var(--g2),var(--g3)); -webkit-background-clip:text; background-clip:text; color:transparent }
+.foot-links{ display:flex; gap:16px; flex-wrap:wrap }
+.foot-links a{ color:#cfd3df } .foot-links a:hover{ color:#fff }
+.copy{ border-top:1px solid var(--border); padding:14px 0; text-align:center; color:#8f96aa; font-size:13px }
+
+
+/* =========================================================================
+   /* 10) UTILIDADES RESPONSIVAS UNIVERSALES — reusables en cualquier HTML
+  */
+ /*  ========================================================================= */
+
+/* Contenedor (acceso corto en sections/main) */
+.container, .wrap, main > section{
+  max-width:1200px; 
+  margin-inline:auto;
+  padding-inline:1rem;
+}
+
+/* Grids utilitarias */
+.grid-12{ display:grid; grid-template-columns:repeat(12,1fr); gap:1rem }
+.grid-auto{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem }
+
+/* Spans por hijos directos (control de columnas sin duplicar CSS) */
+.span-12 > *{ grid-column:span 12 }
+.span-6  > *{ grid-column:span 6 }
+.span-4  > *{ grid-column:span 4 } /* 3 col desktop */
+.span-3  > *{ grid-column:span 3 } /* 4 col desktop */
+
+/* Breakpoints (modificadores) */
+@media (max-width:1024px){
+  .md-span-12 > *{ grid-column:span 12 }
+  .md-span-6  > *{ grid-column:span 6 }  /* 2 columnas */
+  .md-span-4  > *{ grid-column:span 4 }
+}
+@media (max-width:768px){
+  .sm-span-12 > *{ grid-column:1 / -1 }  /* 1 columna */
+  .sm-span-6  > *{ grid-column:span 6 }
+}
+
+
+
+/* Tarjetas base reutilizables (para listas mixtas) */
+.card,.news-card,.review-card{
+  background:var(--card); border:1px solid var(--stroke); border-radius:16px; overflow:hidden;
+}
+/* ======== utilidades extra ======== */
+.empty-state{
+  display:grid; place-items:center; text-align:center; padding:24px;
+  min-height: 220px;
+}
+.empty-state .meta{ color:var(--muted); }
+
+/* formulario simple (contacto) */
+.form-grid{
+  display:grid; gap:12px; grid-template-columns: repeat(2, 1fr);
+}
+.form-grid label{ display:grid; gap:6px; font-weight:600; color:var(--text); }
+.form-grid input, .form-grid textarea{
+  background: #0f1624; border:1px solid var(--border); color:var(--text);
+  border-radius:12px; padding:.8rem 1rem; font: inherit;
+}
+.form-grid .full{ grid-column: 1 / -1; }
+
+/* ranking (Top 10) */
+.list.ranked .item em{ font-style:normal; color:var(--muted); }
+
+
+
+
+.filters .chip.is-active{ outline:2px solid var(--brand1, #7aa7ff); }
+/* --- Meta-bar (arriba) --- */
+.news-meta{
+  display:flex; flex-wrap:wrap; gap:1rem; align-items:center;
+  background:var(--panel, #121826);
+  border:1px solid var(--stroke, #2a3448);
+  border-radius:14px; padding:1rem 1rem; margin:2rem 0 1.25rem ;
+
+}
+
+.news-meta time{ font-weight:700; }
+
+/* --- Select como chip --- */
+#news-sort{
+  appearance:none; -webkit-appearance:none; -moz-appearance:none;
+  border:1px solid var(--stroke, #2a3448);
+  background:var(--card, #1a2234);
+  border-radius:999px; padding:.5rem 2.25rem .5rem .9rem;
+  color:var(--text, #e6e8ef); font-weight:600; cursor:pointer;
+  outline:none;
+  background-image: linear-gradient(transparent,transparent),
+                    radial-gradient(currentColor, currentColor);
+  background-position: right 1rem center, right .9rem center;
+  background-size: 0 0, .35rem .35rem; /* puntito como caret */
+  background-repeat:no-repeat;
+}
+#news-sort:focus{ box-shadow:0 0 0 3px rgba(122,167,255,.25); }
+
+/* --- Cards: imagen misma altura y recorte elegante --- */
+.news-card .cover{
+  display:block; overflow:hidden; border-radius:16px 16px 0 0;
+}
+.news-card .cover img{
+  width:100%;
+  aspect-ratio:16/9;          /* todas iguales */
+  object-fit:cover;
+  display:block;
+}
+
+/* --- Línea meta dentro de la card --- */
+.news-card .meta{
+  display:flex; flex-wrap:wrap; gap:.5rem; align-items:center;
+  color:var(--muted, #a7b0c0); font-size:.95rem;
+}
+
+/* Crea los separadores con CSS (•), sin meter “·” en el HTML/JS */
+.news-card .meta > *{ position:relative; padding-left:.75rem; }
+.news-card .meta > *:first-child{ padding-left:0; }
+.news-card .meta > *:not(:first-child)::before{
+  content:"•"; position:absolute; left:.15rem; opacity:.7;
+}
+
+/* =========================================================
+   🎬 SECCIÓN: PÁGINAS DE CICLOS (library.html / top.html)
+   ========================================================= */
+
+/* === Contenedor general === */
+.wrap, .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* === Toolbar === */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--panel, #121826);
+  border: 1px solid var(--stroke, #2a3448);
+  border-radius: 12px;
+  padding: 12px 18px;
+  margin: 20px 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+}
+
+/* === Botón "Cargar más" === */
+.btn {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--stroke, #2a3448);
+  background: var(--card, #1a2234);
+  color: var(--text, #e6e8ef);
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+.btn:hover {
+  background: var(--accent, #5be3b4);
+  color: #0b0f17;
+  transform: translateY(-2px);
+}
+
+/* === Tabla (FOR) === */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.table th, .table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--stroke, #2a3448);
+}
+.table th {
+  background: rgba(255,255,255,0.03);
+  color: var(--accent, #5be3b4);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-size: 0.9rem;
+}
+.table tbody tr:hover {
+  background: rgba(91, 227, 180, 0.08);
+  transition: background .3s ease;
+}
+
+/* === Mini-cards (DO...WHILE) === */
+.grid-mini {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+.mini {
+  background: var(--card, #1a2234);
+  border: 1px solid var(--stroke, #2a3448);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.25);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.mini:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0,0,0,.35);
+}
+.mini strong {
+  color: var(--brand1, #7aa7ff);
+  font-size: 1.05rem;
+}
+
+/* === Hero ajustes para library / top === */
+
+.hero .eyebrow {
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  color: var(--muted, #a7b0c0);
+  text-transform: uppercase;
+}
+.hero .gradient-title {
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, var(--brand1, #7aa7ff), var(--accent, #5be3b4));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0.2em 0;
+}
+.hero .sub {
+  color: var(--muted, #a7b0c0);
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+/* === Responsividad === */
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+  .table th, .table td { padding: 10px; }
+  .hero .gradient-title { font-size: 2rem; }
+}
+

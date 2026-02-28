@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Biblioteca | Movisionary</title>
+  <meta name="description" content="Explora el catálogo de películas y series curado por Movisionary.">
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700&family=Urbanist:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script type="module" src="../js/main.js" defer></script>
+  
+</head>
+<body class="theme-dark page-library">
+  <!-- ===== Header / Nav ===== -->
+  <header class="main-header">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">🎬</span><span class="logo-type">Movisionary</span>
+      </a>
+      <button id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <nav class="nav menu" aria-label="Navegación principal">
+        <a href="../index.html">Inicio</a>
+        <a href="./news.html">Noticias</a>
+        <a href="./resenas.html">Reseñas</a>
+        <a href="./library.html" class="active" aria-current="page">Biblioteca</a>
+        <a href="./top.html">Top 10</a>
+        <a class="cta" href="./recommender.html">Recomendador</a>
+        <button id="toggle-theme" class="btn-theme" type="button" aria-label="Cambiar tema">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Películas & Series · Catálogo</p>
+      <h1 class="gradient-title">Biblioteca </h1>
+      <p class="sub">Explora por tipo, género, año y popularidad.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#catalogo">Ver catálogo</a>
+        <a class="btn btn-ghost" href="./top.html">Ver Top 10</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Main (CICLOS) ===== -->
+  <main id="catalogo" class="container">
+    <!-- *====================WHILE: Boton=======================* -->
+    <!-- Toolbar + botón cargar -->
+    <section class="toolbar" style="margin-top:8px;">
+      <p class="muted">Catálogo audiovisual</p>
+      <button id="btn-more" class="btn" type="button">Cargar más</button>
+    </section>
+
+     <!-- *====================FOR:Tabla generada=======================* -->
+    <section class="table-wrap" aria-labelledby="tbl-title">
+      <h2 id="tbl-title" class="visually-hidden">Listado de títulos</h2>
+      <div class="table-responsive">
+        <table class="table" aria-label="Tabla de títulos">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Título</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Año</th>
+              <th scope="col">Género</th>
+              <th scope="col">Score</th>
+          
+            </tr>
+          </thead>
+          <!--*======================Filas generadas======================* -->
+          <tbody id="lib-rows"><!-- filas generadas por JS --></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- *=================Sugerencias con DO...WHILE================== -->
+    <section style="margin-top:32px;">
+      <h2>Te puede gustar</h2>
+      <p class="muted">Selección aleatoria : </p>
+      <div id="lib-suggest" class="grid-mini"><!-- tarjetas generadas por JS --></div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="main-footer">
+    <div class="container">
+      <p id="update-date">Última actualización: <span data-update></span></p>
+      <p>© 2025 Movisionary · Biblioteca</p>
+    </div>
+  </footer>
+
+  <!-- Módulo específico javascript-->
+  <script type="module" src="../js/modules/library.js"></script>
+</body>
+</html>

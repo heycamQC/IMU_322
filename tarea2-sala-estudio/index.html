@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entregable Tarea 2: Sala de Estudio Virtual</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 20px; text-align: center; }
+        .experimento { margin-bottom: 40px; }
+        canvas { border: 2px solid #333; box-shadow: 0px 4px 8px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+
+    <h1>Experimentos Canvas - Proyecto de Estudio</h1>
+
+    <div class="experimento">
+        <h2>1. Canvas Puro (API Nativa)</h2>
+        <p>Dibujando la mesa de estudio píxel por píxel con JavaScript puro.</p>
+        <canvas id="canvasPuro" width="400" height="300"></canvas>
+    </div>
+
+    <div class="experimento">
+        <h2>2. Motor Web: PhaserJS</h2>
+        <p>Usa las flechas del teclado para mover a tu avatar por la sala.</p>
+        <div id="contenedor-phaser"></div> 
+    </div>
+
+    <div class="experimento">
+        <h2>3. 3D en Canvas (WebGL con Three.js)</h2>
+        <p>Renderizado de un objeto tridimensional con iluminación.</p>
+        <div id="contenedor-3d"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

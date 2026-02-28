@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="es">
+<head>
+ 
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Movisionary — Descubre nuevas películas y series</title>
+  <meta name="description" content="Movisionary: reseñas, noticias, rankings y un recomendador para saber qué ver hoy.">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700&family=Urbanist:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="icon" href="assets/icons/favicon.png">
+
+   <script type="module" src="../js/main.js" defer></script>
+
+   <script>
+  (function(){
+    try{
+      var k='pref-theme', saved=localStorage.getItem(k);
+      var light = saved ? (saved==='light') : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
+      if(light){ document.documentElement.classList.add('preload-theme-light'); }
+    }catch(e){}
+  })();
+</script>
+<style>
+  /* Mientras pinta, usa la clase temprana en <html> y luego la migración a body no parpadea */
+  .preload-theme-light body{ background:#f6f7fb; color:#0f1220; }
+</style>
+
+</head>
+
+<!-- Todo Body -->
+<body class="theme-dark page-home">
+
+  <!-- TODO: Header -->
+  <header class="header main-header">
+    <div class="container">
+      <a href="./index.html" class="logo" aria-label="Inicio">
+        <span class="logo-mark">🎬</span>
+        <span class="logo-type">Movisionary</span>
+      </a>
+
+      <!-- Boton hamburguesa -->
+      <button id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+      <!-- TODO Nav principal -->
+      <nav class="nav menu" aria-label="Navegación principal">
+        <a href="./index.html" class="active" aria-current="page">Inicio</a>
+        <a href="./index.html" rel="noopener">Noticias</a>
+        <a href="./pages/resenas.html" rel="noopener">Reseñas</a>
+        <a href="./pages/library.html" rel="noopener">Biblioteca</a>
+        <a href="./index.html" rel="noopener">Top 10</a>
+        <a href="./index.html" class="btn btn-primary" rel="noopener">Recomendador</a>
+        <button id="toggle-theme" class="btn-theme" aria-label="Cambiar a tema claro" type="button">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+   <!-- Todo SECTION HERO -->
+     
+  <section class="hero hero-news">
+    <div class="container">
+      <div class="hero-copy">
+        <span class="eyebrow">Cine & Series</span>
+        <h1 class="grad-title">Descubre nuevas películas y series</h1>
+
+        <!-- ?---------------------------------------------------------------------->
+        <!-- ?MENSAJE DE SALUDO /IF-->
+        <p id="greeting"></p>
+        <!-- ?---------------------------------------------------------------------->
+
+        <p class="lead">
+          Reseñas de la comunidad, noticias y un recomendador inteligente para decidir
+          qué ver hoy. Todo en un mismo lugar.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="./index.html" rel="noopener">Probar Recomendador</a>
+          <a class="btn btn-ghost" href="./pages/news.html" rel="noopener">Ver estrenos</a>
+        </div>
+
+        <ul class="kpis">
+          <li class="kpi"><strong>+1K</strong><span>títulos curados</span></li>
+          <li class="kpi"><strong>4.7★</strong><span>promedio comunidad</span></li>
+          <li class="kpi"><strong>24/7</strong><span>novedades</span></li>
+        </ul>
+
+        <p class="tiny">Tendencias actualizadas diario</p>
+      </div>
+
+      
+
+      
+    </div>
+    <div class="hero-gradient"></div>
+  </section>
+
+  <!-- Todo Seccion DESTACADOS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="grad-subtitle">Destacados de la semana</h2>
+        <a class="link" href="./pages/library.html" rel="noopener">Ver todo →</a>
+      </div>
+
+      
+      <div class="grid">
+
+        <!-- Todo Article -->
+        <article class="card">
+          <div class="thumb">
+            <img src="https://upload.wikimedia.org/wikipedia/en/5/52/Dune_Part_Two_poster.jpeg" alt="Dune: Part Two poster" loading="lazy">
+          </div>
+          <div class="content">
+            <h3>Dune: Part Two</h3>
+            <p class="meta">Sci-fi • 2024 — <span class="rate">4.6★</span></p>
+          </div>
+        </article>
+        <!-- Todo Article -->
+        <article class="card">
+          <div class="thumb">
+            <img src="https://www.infobae.com/new-resizer/1ts6qDldBD3hPPHLDxn05ajBqKs=/arc-anglerfish-arc2-prod-infobae/public/VLFHY43STVH3PBSEULWXPRCSIY.jpeg" alt="Oppenheimer" loading="lazy">
+          </div>
+          <div class="content">
+            <h3>Oppenheimer</h3>
+            <p class="meta">Drama • 2023 — <span class="rate">4.8★</span></p>
+          </div>
+        </article>
+        <!-- Todo Article -->
+        <article class="card">
+          <div class="thumb">
+            <img src="https://images.justwatch.com/poster/322700683/s718/temporada-1.jpg" alt="Arcane poster" loading="lazy">
+          </div>
+          <div class="content">
+            <h3>Arcane</h3>
+            <p class="meta">Animación • 2021 — <span class="rate">4.9★</span></p>
+          </div>
+        </article>
+        <!-- Todo Article -->
+        <article class="card">
+          <div class="thumb">
+            <img src="https://i.redd.it/a-poster-i-designed-for-the-bear-v0-3ivprpd5odfb1.jpg?width=1080&format=pjpg&auto=webp&s=fd439a98340d49e1771b1ece29a9ad68a59587c1" alt="The Bear poster" loading="lazy">
+          </div>
+          <div class="content">
+            <h3>The Bear</h3>
+            <p class="meta">Drama/Comedia • 2022 — <span class="rate">4.7★</span></p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Todo BLOQUE DOBLE: RESENAAS Y NOTICIAS -->
+  <section class="section">
+    <div class="container split">
+      <div class="panel">
+        <h2 class="panel-title">Últimas reseñas</h2>
+        <ul class="list">
+          <li><a class="item" href="./pages/resenas.html" rel="noopener"><span>“Brutal y elegante” — Dune 2</span><em>4.5★</em></a></li>
+          <li><a class="item" href="./pages/resenas.html" rel="noopener"><span>“Una masterclass de tensión” — The Bear</span><em>4.7★</em></a></li>
+          <li><a class="item" href="./pages/resenas.html" rel="noopener"><span>“La animación del año” — Arcane</span><em>4.9★</em></a></li>
+        </ul>
+        <a class="btn btn-light" href="./pages/resenas.html" rel="noopener">Escribir una reseña</a>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-title">Noticias & estrenos</h2>
+        <ul class="list">
+          <li><a class="item" href="./index.html" rel="noopener"><span>Trailer final de Arcane S2</span><em>Hoy</em></a></li>
+          <li><a class="item" href="./index.html" rel="noopener"><span>Reestreno IMAX confirmado</span><em>Ayer</em></a></li>
+          <li><a class="item" href="./index.html" rel="noopener"><span>Calendario de premiaciones</span><em>Esta semana</em></a></li>
+        </ul>
+        <a class="btn btn-ghost" href="./index.html" rel="noopener">Ver más noticias</a>
+      </div>
+    </div>
+  </section>
+
+  <!--Todo Section COMUNIDAD / QUIZ -->
+  <section class="section">
+    <div class="container community">
+      <div>
+        <h2 class="grad-subtitle">Comunidad & Quiz</h2>
+        <p>Responde 5 preguntas y te sugerimos qué ver. Comparte teorías con fans.</p>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#quiz-panel">Jugar el quiz</a>
+        <a class="btn btn-light" href="./pages/top.html" rel="noopener">Ver Top 10</a>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!--Todo Footer -->
+  <footer class="footer">
+    <div class="container foot-grid">
+      <div>
+        <b class="logo-type grad-text">Movisionary</b>
+        <p class="foot-note">Hecho por Heidy Quispe & Soledad Vásquez.</p>
+      </div>
+      <nav class="foot-links" aria-label="Links secundarios">
+        <a href="" rel="noopener">Acerca de</a>
+        <a href="" rel="noopener">Contacto</a>
+        <a href="" rel="noopener">Mapa de streaming</a>
+        <a href="" rel="noopener">Demo TMDb</a>
+      </nav>
+    </div>
+    <div class="copy">© 2026 Movisionary</div>
+  </footer>
+
+  <!-- JS de quizzes -->
+  <script type="module" src="./js/modules/quizzes.js"></script>
+</body>
+</html>
